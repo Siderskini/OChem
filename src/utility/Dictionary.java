@@ -14,5 +14,7 @@ public class Dictionary {
 	
 	// Names of commonly used functional groups
 	public static final String CARBONYL = "Carbonyl";
+	public static final String ALCOHOL = "Alcohol";
+	public static final String ALKYL_HALIDE = "Alkyl Halide";
 
 }

@@ -23,7 +23,7 @@ public class Alcohol extends FunctionalGroup implements Acidic {
 	 * the -OH bond
 	 */
 	public Alcohol(Bond[] peripherals) {
-		super("Alcohol", new Atom(Dictionary.OXYGEN), peripherals);
+		super(Dictionary.ALCOHOL, new Atom(Dictionary.OXYGEN), peripherals);
 
 		// add the acidic hydrogen
 		add(new Bond(new Atom(Dictionary.HYDROGEN), Bond.BOND_TYPE.SINGLE));
