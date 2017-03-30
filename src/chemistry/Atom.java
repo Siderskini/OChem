@@ -1,3 +1,6 @@
+package chemistry;
+import utility.Bondable;
+
 /**
  * Holds an Atom object
  */

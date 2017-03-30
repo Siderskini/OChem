@@ -1,3 +1,7 @@
+package utility;
+
+import chemistry.Bond;
+
 /**
  * @author Derek
  * 

@@ -1,5 +1,8 @@
 import static org.junit.Assert.*;
+
 import org.junit.*;
+
+import chemistry.Atom;
 
 /**
  * Created by Siderskini1 on 3/29/17.

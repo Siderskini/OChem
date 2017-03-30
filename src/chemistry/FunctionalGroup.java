@@ -1,4 +1,7 @@
+package chemistry;
 import java.util.Arrays;
+
+import utility.Bondable;
 
 /**
  * @author Derek
