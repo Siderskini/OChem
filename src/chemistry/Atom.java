@@ -1,86 +1,114 @@
 package chemistry;
+import java.util.ArrayList;
+
 import utility.Bondable;
 
 /**
  * Holds an Atom object
  */
-public class Atom implements Bondable{
-    //All atoms have valence electrons and subatomic particles
-    private int valence, protons, neutrons, electrons;
+public class Atom implements Bondable {
+	// All atoms have valence electrons and subatomic particles
+	private int valence, protons, neutrons, electrons;
 
-    //Default Constructor
-    public Atom() {
-        this(1, 1);
-    }
+	// List of bonds on the atom
+	private ArrayList<Bond> bonds;
 
-    //Main Constructor
-    public Atom(int atomicNum, int atomicMass) {
-        this(atomicNum, atomicMass, 0);
-    }
+	// Name of the element this atom belongs to
+	private String element;
 
-    //Constructor if there's a charge
-    public Atom(int atomicNum, int atomicMass, int charge) {
-        protons = atomicNum;
-        neutrons = atomicMass - atomicNum;
-        electrons = protons - charge;
-        if (electrons < 3) {
-            valence = electrons;
-        } else if (electrons < 21) {
-            valence = Math.floorMod(electrons + 6, 8);
-        } else if (electrons < 57) {
-            if ((electrons - 3) % 18 < 10) {
-                valence = -1;
-            } else {
-                if (electrons % 18 < 3) {
-                    valence = electrons % 18;
-                }
-                else {
-                    valence = (electrons + 8) % 18;
-                }
-            }
-        }
-        if (valence == 0) {
-            if (atomicNum == 1) {
-                valence = 0;
-            } else if (atomicNum < 3) {
-                valence = 2;
-            } else {
-                valence = 8;
-            }
-        }
-    }
+	// Default Constructor
+	public Atom(String element) {
+		this("Hydrogen", 1);
+	}
 
-    //Returns the number of valence electrons
-    public int getValence() {
-        return valence;
-    }
+	// Main Constructor
+	public Atom(String element, int atomicNum) {
+		this.element = element;
+		electrons = atomicNum;
+		bonds = new ArrayList<>();
+		valence = computeValence(electrons);
+	}
 
-    //Returns the formal charge on the atom
-    public int formalCharge() {
-        return valence - loners() - numBonds();
-    }
+	// Bonding Constructor
+	public Atom(String element, int atomicNum, ArrayList<Bond> bonds) {
+		this.element = element;
+		electrons = atomicNum;
+		this.bonds = bonds;
+		valence = computeValence(electrons);
+	}
 
-    /**
-     * Returns the total number of bonded electrons divided by 2
-     *This is equal to the number of bonds, counting double/triple bonds accordingly
-    */
-    public int numBonds() {
-        return 0;
-    }
+	// Computes number of valence electrons based on number of electrons
+	private int computeValence(int electrons) {
+		int valence = 0;
+		if (electrons < 3) {
+			valence = electrons;
+		} else if (electrons < 21) {
+			valence = (electrons + 6) % 8;
+		} else if (electrons < 57) {
+			if ((electrons - 3) % 18 < 10) {
+				valence = -1;
+			} else {
+				if (electrons % 18 < 3) {
+					valence = electrons % 18;
+				} else {
+					valence = (electrons + 8) % 18;
+				}
+			}
+		}
+		return valence;
+	}
 
-    //Returns the number of lone electrons surrounding the atom
-    public int loners() {
-        if (protons > 2) {
-            return 8 - 2 * numBonds();
-        } else {
-            return 0;
-        }
-    }
+	// Returns the number of valence electrons
+	public int getValence() {
+		return valence;
+	}
 
+	// Returns the formal charge on the atom
+	public int formalCharge() {
+		return valence - loners() - numBonds();
+	}
+
+	/**
+	 * Returns the total number of bonded electrons divided by 2
+	 * This is equal to the number of bonds, counting double/triple bonds
+	 * accordingly
+	 */
+	public int numBonds() {
+		int total = 0;
+		for (Bond bond : bonds) {
+			switch (bond.getBondType()) {
+			case TRIPLE:
+				total++;
+			case DOUBLE:
+				total++;
+			case SINGLE:
+				total++;
+			default:
+				break;
+			}
+		}
+		return total;
+	}
+
+	// Returns the number of lone electrons surrounding the atom
+	public int loners() {
+		if (protons > 2) {
+			return 8 - 2 * numBonds();
+		} else {
+			return 0;
+		}
+	}
+
+	// Adds a bond to the list of bonds
 	@Override
 	public boolean add(Bond bond) {
-		// TODO Auto-generated method stub
-		return false;
+		return bonds.add(bond);
+	}
+
+	// Removes a bond from the list of bonds
+	@Override
+	public boolean remove(Bond bond) {
+		return bonds.remove(bond);
 	}
 
 }
