@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @author Derek
  * 
@@ -7,13 +9,10 @@
 public class FunctionalGroup implements Bondable {
 	
 	// All functional groups have a name
-	private String name;
+	private final String name;
 	
 	// all functional groups have a center atom
-	private Atom center;
-	
-	// List of bonds in the functional group
-	private Bond[] bonds;
+	private final Atom center;
 	
 	/**
 	 * Functional Group constructor
@@ -23,9 +22,13 @@ public class FunctionalGroup implements Bondable {
 	 * @param peripherals all bonds connected to the center atom
 	 */
 	public FunctionalGroup(String name, Atom center, Bond... peripherals) {
+		
+		// assign instance data
 		this.name = name;
 		this.center = center;
-		bonds = peripherals;
+		
+		// add each bond to the center atom
+		Arrays.asList(peripherals).stream().forEach(e -> center.add(e));
 	}
 	
 	/**
@@ -37,8 +40,24 @@ public class FunctionalGroup implements Bondable {
 		return name;
 	}
 
-	public void add(Bond bond) {
-		
+	/**
+	 * add()
+	 * 
+	 * Adds a bond to the central atom
+	 * 
+	 * @return true if operation was successful
+	 */
+	public boolean add(Bond bond) {
+		return center.add(bond);
+	}
+
+	/**
+	 * remove()
+	 * 
+	 * Removes a bond from the central atom
+	 */
+	public boolean remove(Bond bond) {
+		return center.remove(bond);
 	}
 
 }

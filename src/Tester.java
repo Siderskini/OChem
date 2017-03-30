@@ -1,6 +1,5 @@
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
+import org.junit.*;
 
 /**
  * Created by Siderskini1 on 3/29/17.

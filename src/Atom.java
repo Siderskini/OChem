@@ -75,9 +75,9 @@ public class Atom implements Bondable{
     }
 
 	@Override
-	public void add(Bond bond) {
+	public boolean add(Bond bond) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

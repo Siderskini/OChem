@@ -11,7 +11,16 @@ public interface Bondable {
 	 * 
 	 * @param bond the bond to add to the
 	 * atom or structure
+	 * @return true on success, false on failure
 	 */
-	public abstract void add(Bond bond);
+	public abstract boolean add(Bond bond);
+	
+	/**
+	 * remove
+	 * 
+	 * @param bond the bond to remove from the atom
+	 * @return true on success, false on failure
+	 */
+	public abstract boolean remove(Bond bond);
 
 }
