@@ -1,29 +1,46 @@
+import java.util.ArrayList;
+
 /**
  * Holds an Atom object
  */
 public class Atom implements Bondable{
-    //All atoms have valence electrons and subatomic particles
+    // All atoms have valence electrons and subatomic particles
     private int valence, protons, neutrons, electrons;
 
+    // List of bonds on the atom
+    private ArrayList<Bond> bonds;
+
+    // Name of the element this atom belongs to
+    private String element;
+
     //Default Constructor
-    public Atom() {
-        this(1, 1);
+    public Atom(String element) {
+        this("Hydrogen", 1);
     }
 
     //Main Constructor
-    public Atom(int atomicNum, int atomicMass) {
-        this(atomicNum, atomicMass, 0);
+    public Atom(String element, int atomicNum) {
+        this.element = element;
+        electrons = atomicNum;
+        bonds = new ArrayList<>();
+        valence = computeValence(electrons);
     }
 
-    //Constructor if there's a charge
-    public Atom(int atomicNum, int atomicMass, int charge) {
-        protons = atomicNum;
-        neutrons = atomicMass - atomicNum;
-        electrons = protons - charge;
+    //Bonding Constructor
+    public Atom(String element, int atomicNum, ArrayList<Bond> bonds) {
+        this.element = element;
+        electrons = atomicNum;
+        this.bonds = bonds;
+        valence = computeValence(electrons);
+    }
+
+    // Computes number of valence electrons based on number of electrons
+    private int computeValence(int electrons) {
+        int valence = 0;
         if (electrons < 3) {
             valence = electrons;
         } else if (electrons < 21) {
-            valence = Math.floorMod(electrons + 6, 8);
+            valence = (electrons + 6) % 8;
         } else if (electrons < 57) {
             if ((electrons - 3) % 18 < 10) {
                 valence = -1;
@@ -36,15 +53,7 @@ public class Atom implements Bondable{
                 }
             }
         }
-        if (valence == 0) {
-            if (atomicNum == 1) {
-                valence = 0;
-            } else if (atomicNum < 3) {
-                valence = 2;
-            } else {
-                valence = 8;
-            }
-        }
+        return valence;
     }
 
     //Returns the number of valence electrons
@@ -62,7 +71,20 @@ public class Atom implements Bondable{
      *This is equal to the number of bonds, counting double/triple bonds accordingly
     */
     public int numBonds() {
-        return 0;
+        int total = 0;
+        for (Bond bond: bonds) {
+            switch (bond.getBondType()) {
+                case TRIPLE:
+                    total ++;
+                case DOUBLE:
+                    total ++;
+                case SINGLE:
+                    total ++;
+                default:
+                    break;
+            }
+        }
+        return total;
     }
 
     //Returns the number of lone electrons surrounding the atom
@@ -74,10 +96,16 @@ public class Atom implements Bondable{
         }
     }
 
+    //Adds a bond to the list of bonds
 	@Override
 	public boolean add(Bond bond) {
-		// TODO Auto-generated method stub
-		return false;
+		return bonds.add(bond);
 	}
+
+	//Removes a bond from the list of bonds
+    @Override
+    public boolean remove(Bond bond) {
+        return bonds.remove(bond);
+    }
 
 }
