@@ -1,6 +1,7 @@
 package chemistry;
 import java.util.Arrays;
 
+import chemistry.Bond.BOND_TYPE;
 import utility.Bondable;
 
 /**
@@ -61,6 +62,38 @@ public class FunctionalGroup implements Bondable {
 	 */
 	public boolean remove(Bond bond) {
 		return center.remove(bond);
+	}
+	
+	/**
+	 * contains()
+	 * 
+	 * @param name the atom/group name
+	 * @param type the bond type
+	 * @return true if the group contains the specified bond
+	 */
+	public boolean contains(String name, BOND_TYPE type) {
+		return center.contains(name, type);
+	}
+	
+	/**
+	 * getBond()
+	 * 
+	 * @param name the atom/group name
+	 * @param type the bond type
+	 * @return the bond attached to the atom
+	 */
+	public Bond getBond(String name, BOND_TYPE type) {
+		return center.getBond(name, type);
+	}
+	
+	/**
+	 * hasLonePair()
+	 * 
+	 * @return true if the atom has a lone pair
+	 * of electrons
+	 */
+	public boolean hasLonePair() {
+		return center.hasLonePair();
 	}
 
 }

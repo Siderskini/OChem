@@ -15,7 +15,7 @@ public interface Acidic {
 	 * Changes the pka 
 	 * pka is influenced by surrounding structure
 	 */
-	public abstract void setPka();
+	public abstract void setPka(int pka);
 
 	/**
 	 * Required work to protonate the acid

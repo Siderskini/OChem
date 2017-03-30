@@ -1,7 +1,7 @@
 package chemistry;
 import java.util.ArrayList;
 
-import utility.Reactions;
+import utility.Reactions.REACTION_TYPE;
 
 /**
  * @author Derek
@@ -49,10 +49,10 @@ public class Solvent {
 	 * @return A list of POSSIBLE reactions that
 	 * CAN occur in the solvent
 	 */
-	public ArrayList<Reactions.REACTION_TYPE> getReactions() {
+	public ArrayList<REACTION_TYPE> getReactions() {
 		
 		// list of possible reactions
-		ArrayList<Reactions.REACTION_TYPE> reactions = new ArrayList<Reactions.REACTION_TYPE>();
+		ArrayList<REACTION_TYPE> reactions = new ArrayList<REACTION_TYPE>();
 		
 		// no reactions occur in apolar solvents
 		if (!isPolar) {
@@ -61,13 +61,13 @@ public class Solvent {
 		
 		// protic solvents promote sn1 or e1
 		if (isProtic) {
-			reactions.add(Reactions.REACTION_TYPE.E1);
-			reactions.add(Reactions.REACTION_TYPE.SN1);
+			reactions.add(REACTION_TYPE.E1);
+			reactions.add(REACTION_TYPE.SN1);
 		}
 		
 		// sn2 or e2 can occur in any polar solvent
-		reactions.add(Reactions.REACTION_TYPE.SN2);
-		reactions.add(Reactions.REACTION_TYPE.E2);
+		reactions.add(REACTION_TYPE.SN2);
+		reactions.add(REACTION_TYPE.E2);
 		
 		// return the list
 		return reactions;
