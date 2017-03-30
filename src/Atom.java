@@ -47,7 +47,7 @@ public class Atom {
         }
     }
 
-    //Resturns the number of valence electrons
+    //Returns the number of valence electrons
     public int getValence() {
         return valence;
     }
