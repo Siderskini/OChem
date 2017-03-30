@@ -1,7 +1,7 @@
 /**
  * Created by Siderskini1 on 3/29/17.
  */
-public class Atom {
+public class Atom implements Bondable {
     private int v, p, n, e;
 
     public Atom() {
@@ -40,5 +40,11 @@ public class Atom {
     public int getValence() {
         return v;
     }
+
+	@Override
+	public void add(Bond bond) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
