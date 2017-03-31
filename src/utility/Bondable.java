@@ -27,4 +27,11 @@ public interface Bondable {
 	 */
 	public abstract boolean remove(Bond bond);
 
+	/**
+	 * getName
+	 *
+	 * @return String name of bondable
+	 */
+	public abstract String getName();
+
 }

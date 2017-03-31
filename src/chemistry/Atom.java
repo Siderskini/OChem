@@ -13,8 +13,8 @@ public class Atom implements Bondable {
 	// List of bonds on the atom
 	private ArrayList<Bond> bonds;
 
-	// Name of the element this atom belongs to
-	private String element;
+	// Name of this atom belongs to
+	private String name;
 
 	// Default Constructor
 	public Atom(String element) {
@@ -22,16 +22,16 @@ public class Atom implements Bondable {
 	}
 
 	// Main Constructor
-	public Atom(String element, int atomicNum) {
-		this.element = element;
+	public Atom(String name, int atomicNum) {
+		this.name = name;
 		electrons = atomicNum;
 		bonds = new ArrayList<>();
 		valence = computeValence(electrons);
 	}
 
 	// Bonding Constructor
-	public Atom(String element, int atomicNum, ArrayList<Bond> bonds) {
-		this.element = element;
+	public Atom(String name, int atomicNum, ArrayList<Bond> bonds) {
+		this.name = name;
 		electrons = atomicNum;
 		this.bonds = bonds;
 		valence = computeValence(electrons);
@@ -66,6 +66,11 @@ public class Atom implements Bondable {
 	// Returns the number of valence electrons
 	public int getValence() {
 		return valence;
+	}
+
+	// Returns the name of this atom
+	public String getName() {
+		return name;
 	}
 
 	// Returns the formal charge on the atom
@@ -116,14 +121,24 @@ public class Atom implements Bondable {
 		return bonds.remove(bond);
 	}
 
-	// Returns a bond
+	// Returns the bond in bonds with the given name and type, or returns null if not found
 	public Bond getBond(String name, Bond.BOND_TYPE type) {
-		return bonds.get(bonds.indexOf(type));
+		for (Bond b: bonds) {
+			if (b.getBondType().equals(type) && b.getOther().getName().equals(name)) {
+				return b;
+			}
+		}
+		return null;
 	}
 
 	// Returns true if this atom contains a bond of the specified type
 	public boolean contains(String name, Bond.BOND_TYPE type) {
-		return bonds.contains(type);
+		for (Bond b: bonds) {
+			if (b.getBondType().equals(type) && b.getOther().getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
