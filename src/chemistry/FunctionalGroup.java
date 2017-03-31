@@ -93,7 +93,7 @@ public class FunctionalGroup implements Bondable {
 	 * of electrons
 	 */
 	public boolean hasLonePair() {
-		return center.hasLonePair();
+		return center.loners() > 0;
 	}
 
 }

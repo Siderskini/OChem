@@ -18,7 +18,7 @@ public class Atom implements Bondable {
 
 	// Default Constructor
 	public Atom(String element) {
-		this("Hydrogen", 1);
+		this(element, 1);
 	}
 
 	// Main Constructor
@@ -53,6 +53,11 @@ public class Atom implements Bondable {
 				} else {
 					valence = (electrons + 8) % 18;
 				}
+			}
+		}
+		if (valence == 0) {
+			if (electrons > 2) {
+				return 8;
 			}
 		}
 		return valence;
@@ -109,6 +114,16 @@ public class Atom implements Bondable {
 	@Override
 	public boolean remove(Bond bond) {
 		return bonds.remove(bond);
+	}
+
+	// Returns a bond
+	public Bond getBond(String name, Bond.BOND_TYPE type) {
+		return bonds.get(bonds.indexOf(type));
+	}
+
+	// Returns true if this atom contains a bond of the specified type
+	public boolean contains(String name, Bond.BOND_TYPE type) {
+		return bonds.contains(type);
 	}
 
 }
