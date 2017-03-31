@@ -2,6 +2,7 @@ package chemistry;
 import java.util.ArrayList;
 
 import utility.Bondable;
+import utility.Dictionary;
 
 /**
  * Holds an Atom object
@@ -140,5 +141,6 @@ public class Atom implements Bondable {
 		}
 		return false;
 	}
+	
 
 }

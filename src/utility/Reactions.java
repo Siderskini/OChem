@@ -16,5 +16,5 @@ public class Reactions {
 	public enum REACTION_TYPE {
 		SN2, SN1, E1, E2
 	}
-
+	
 }

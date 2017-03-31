@@ -30,7 +30,7 @@ public class Bond {
 	 * enum BOND_TYPE
 	 * 
 	 * There are three types of bonds:
-	 * sp3, sp2, and sp
+	 * single, double, and triple
 	 */
 	public enum BOND_TYPE {
 		SINGLE, DOUBLE, TRIPLE
