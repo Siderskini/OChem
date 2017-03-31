@@ -21,12 +21,22 @@ public class Parser {
         bondables = new ArrayList<>();
     }
 
+    public Atom[] Parse(String input) {
+        createBondables(input);
+        Atom[] atoms = new Atom[bondables.size()];
+        for (int i = 0; i < bondables.size(); i++) {
+            atoms[i] = bondables.get(i);
+        }
+        return atoms;
+    }
+
+
     /**
      * @param input is String input from user
      *
      * Recursively tokenizes and adds functional groups to bondables
      */
-    public void Parse(String input) {
+    public void createBondables(String input) {
         String symbol = "";
         ArrayList<String> tokens = new ArrayList<>();
         char current;
@@ -36,7 +46,8 @@ public class Parser {
             if (current == ']') {
                 tokens.add(symbol);
                 bondables.add(parseToken(tokens));
-                Parse(input.substring(i + 1));
+                createBondables(input.substring(i + 1));
+                return;
             } else {
                 if (65 <= current && 90 >= current) {
                     if (first) {
@@ -55,7 +66,7 @@ public class Parser {
 
     // Finds the central atom, adds bonds from it to the other atoms, and returns it
     private Atom parseToken(ArrayList<String> tokens) {
-        System.out.print(tokens);
-        return null;
+        System.out.println(tokens);
+        return new Atom("Hydrogen");
     }
 }

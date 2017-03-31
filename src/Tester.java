@@ -40,8 +40,9 @@ public class Tester {
     @Test
     public void parseTest() {
         Parser parser = new Parser();
-        parser.Parse("[HNaSXe2SO4]");
+        Atom[] atoms = parser.Parse("[HNa][SXe2][SO4]");
+        for (Atom atom: atoms) {
+            System.out.println(atom.getName());
+        }
     }
-
-
 }

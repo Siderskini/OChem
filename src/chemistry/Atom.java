@@ -141,6 +141,11 @@ public class Atom implements Bondable {
 		}
 		return false;
 	}
+
+	// Returns true if the atom is a halogen and false otherwise
+	public boolean isHalogen() {
+		return valence == 7;
+	}
 	
 
 }
