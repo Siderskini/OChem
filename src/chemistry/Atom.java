@@ -1,6 +1,6 @@
 package chemistry;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import utility.Bondable;
 import utility.Dictionary;
 
@@ -76,7 +76,7 @@ public class Atom implements Bondable {
 
 	// Returns the formal charge on the atom
 	public int formalCharge() {
-		return valence - loners() - numBonds();
+		return valence - getLoneElectrons() - numBonds();
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class Atom implements Bondable {
 	}
 
 	// Returns the number of lone electrons surrounding the atom
-	public int loners() {
+	public int getLoneElectrons() {
 		if (protons > 2) {
 			return 8 - 2 * numBonds();
 		} else {
